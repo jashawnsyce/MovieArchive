@@ -8,7 +8,9 @@ const MovieCard = ({movie}) => {
       </div>
 
       <div>
-        <img src={movie.Poster !== 'N/A' ? movie.Poster :'http://via.placeholder.com/400'}></img>
+        <a href={`https://www.imdb.com/title/${movie.imdbID}/`}>
+          <img src={movie.Poster !== 'N/A' ? movie.Poster :'http://via.placeholder.com/400'} />
+        </a>
       </div>
 
       <div>

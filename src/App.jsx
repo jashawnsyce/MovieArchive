@@ -16,6 +16,7 @@ function App() {
     const data = await response.json()
 
     setMovies(data.Search)
+    //console.log(data.Search)
   }
 
   
@@ -24,17 +25,22 @@ function App() {
     searchMovies('Star Wars')
     }, [])
 
+    function submitSearch(e) {
+      e.preventDefault()
+      searchMovies(searchTerm)
+    }
+
   return (
     <>
       <h1>The Movie Archive</h1>
-      <div className='search'>
-        <input placeholder='Search movies here' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onSubmit={() => {searchMovies(searchTerm)}} ></input>
+      <form className='search' onSubmit={submitSearch}>
+        <input placeholder='Search movies here' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}  ></input>
         <img src={SearchIcon} alt='search' onClick={() => {searchMovies(searchTerm)}}></img>
-      </div>
+      </form>
       {
         movies?.length > 0 ? (
           <div className='container'>
-            {movies.map((movie) => (<MovieCard className='moviecard' movie={movie}/>))}
+            {movies.map((movie) => (<MovieCard key={`${crypto.randomUUID()}`} className='moviecard' movie={movie}/>))}
           </div>
         ) : (
           <div className='empty'>
